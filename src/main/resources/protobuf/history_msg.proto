@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_outer_classname = "HistoryMsgProto";
+option java_package = "com.simba.im.domain.message.entity";
+
+// 拉取历史消息记录  消息号 13
+message HistoryMsgReq {
+    uint64 group_id = 1;                     // 组Id
+    bool is_range = 2;                       // 是否范围查询
+    SearchCondition search_condition = 3;    // 范围查询条件
+}
+
+// 拉取历史记录响应  消息号 14
+message HistoryMsgResp {
+    repeated HistoryMsg history_msg = 1;  // 历史消息
+}
+
+// 历史消息
+message HistoryMsg {
+    int64 sequence_id = 1;        // 消息序列号
+    uint64 group_id = 2;          // 组Id
+    uint64 create_time = 3;       // 生成时间
+    string content = 4;           // 消息内容
+    string sender_name = 5;       // 发送者名称
+    string sender_id = 6;         // 发送者Id
+    uint32 is_master = 7;         // 是否是主播 （0 否 1 是）
+}
+
+// 查询条件
+message SearchCondition {
+    int64 start_seq = 1;        // 起始序列号
+    int32 num = 2;              // 查询数量
+}

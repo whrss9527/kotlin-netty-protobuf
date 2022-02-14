@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_outer_classname = "JoinGroupProto";
+option java_package = "com.simba.im.domain.message.entity";
+
+// 加入房间请求 消息号 17
+message JoinGroupReq {
+    string user_id = 1;          // 用户Id
+    uint64 old_group_id = 2;     // 原组Id
+    uint64 now_group_id = 3;     // 新组Id
+    string user_name = 4;        // 用户名称
+}
+
+// 加入房间响应 消息号 18
+message JoinGroupResp {
+    string code = 1;            // 状态码
+    string message = 2;         // 描述
+}

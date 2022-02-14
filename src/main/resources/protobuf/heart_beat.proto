@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+option java_outer_classname = "HeartBeatProto";
+
+
+// 心跳包  client-消息号 1  server-消息号 2
+message HeartBeat {}

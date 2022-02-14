@@ -1,0 +1,5 @@
+serializer:
+  algorithm: Json
+
+server:
+  port: 8012

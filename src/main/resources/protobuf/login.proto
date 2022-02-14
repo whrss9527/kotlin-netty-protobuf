@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_outer_classname = "LoginProto";
+option java_package = "com.simba.im.domain.message.entity";
+
+// 登录请求  消息号 3
+message LoginReq {
+    string access_token = 1;  // idol's token
+    string user_id = 2;       // 用户Id
+    string device_name = 3;   // 设备信息
+}
+
+// 登录响应  消息号 4
+message LoginResp {
+    string code = 1;            // 状态码
+    string message = 2;         // 描述
+}

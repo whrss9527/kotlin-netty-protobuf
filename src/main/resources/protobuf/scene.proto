@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_outer_classname = "SceneProto";
+option java_package = "com.simba.im.domain.message.entity";
+
+// 场景同步  消息号 10
+message SceneSync {
+    uint32 is_night = 1;            // 是否夜晚
+    uint32 bgm = 2;                 // 背景音乐
+    uint32 sound = 3;               // 音效
+    repeated Role role = 4;         // 角色
+    uint32 is_live = 5;             // 是否直播
+    uint32 bg = 6;                  // 背景图片
+}
+
+// 角色
+message Role {
+    uint32 character_id = 1;   // 角色Id
+    uint32 at_home = 2;        // 是否在家
+    uint32 skin = 3;           // 皮肤
+    uint32 position = 4;       // 位置
+    uint32 expression = 5;     // 表情
+    string message = 6;        // 留言信息
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_outer_classname = "ExpressionProto";
+option java_package = "com.simba.im.domain.message.entity";
+
+// 角色表情同步  消息号 12
+message ExpressionSync {
+    uint32 character_id = 1;      // 角色Id
+    uint32 expression = 2;        // 表情
+}
