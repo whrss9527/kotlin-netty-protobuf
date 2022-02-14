@@ -30,7 +30,7 @@ class ChatServer {
 //    }
     private var future: ChannelFuture? = null
     fun start() {
-        future = serverBootstrap.bind(8021)
+        future = serverBootstrap.bind(8011)
         logger.error("netty 服务端启动完毕 .....")
     }
 

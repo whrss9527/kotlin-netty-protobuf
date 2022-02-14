@@ -1,6 +1,7 @@
 package com.ck567.netty.chatroom.protocol
 
 import com.ck567.netty.chatroom.message.Message
+import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageEncoder
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component
 import java.lang.Exception
 
 @Component
+@ChannelHandler.Sharable
 class MessageEncoder : MessageToMessageEncoder<Message>() {
     @Throws(Exception::class)
     override fun encode(ctx: ChannelHandlerContext, msg: Message, out: MutableList<Any>) {
