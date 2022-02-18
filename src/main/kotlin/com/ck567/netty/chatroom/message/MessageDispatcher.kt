@@ -15,13 +15,13 @@ import java.lang.Exception
  */
 @ChannelHandler.Sharable
 @Component
-class MessageDispatcher:
-    SimpleChannelInboundHandler<Message>() {
+class MessageDispatcher: SimpleChannelInboundHandler<Message>() {
     @Autowired
     lateinit var container: MessageHandlerContainer
 
     @Throws(Exception::class)
     override fun channelRead0(ctx: ChannelHandlerContext, msg: Message) {
+        println("MessageDispatcher")
         val handler: MessageHandler<MessageLite> = container.getHandler(msg.type)
         handler.execute(ctx.channel(), msg.msg!!)
     }

@@ -6,10 +6,7 @@ import com.ck567.netty.chatroom.protocol.MessageDecoder
 import com.ck567.netty.chatroom.protocol.MessageEncoder
 import com.ck567.netty.chatroom.server.handler.*
 import com.ck567.netty.chatroom.util.logger
-import io.netty.channel.Channel
-import io.netty.channel.ChannelDuplexHandler
-import io.netty.channel.ChannelHandlerContext
-import io.netty.channel.ChannelInitializer
+import io.netty.channel.*
 import io.netty.channel.socket.SocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
@@ -24,39 +21,37 @@ import java.lang.Exception
 import io.netty.handler.stream.ChunkedWriteHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import javax.annotation.PostConstruct
 
+@ChannelHandler.Sharable
 @Component
 class ChatServerInitializer :  ChannelInitializer<Channel>() {
-    private val LOGGING_HANDLER = LoggingHandler(LogLevel.DEBUG)
+
+    @Autowired
+    lateinit var messageEncoder: MessageEncoder
+    @Autowired
+    lateinit var messageDecoder: MessageDecoder
+    @Autowired
+    lateinit var messageDispatcher: MessageDispatcher
+
+//    private val channelStateHandler: ChannelStateHandler? = null
+    @Autowired
+    lateinit var serverIdleStateHandler: ServerIdleStateHandler
 
 
-     var decoder: MessageDecoder = MessageDecoder()
-     var encoder: MessageEncoder= MessageEncoder()
 
 
-     var dispatcher: MessageDispatcher = MessageDispatcher()
-
-     var idle:ServerIdleStateHandler = ServerIdleStateHandler()
-
-
-
-    @Throws(Exception::class)
-    override fun initChannel(ch: Channel) {
-
-        // 日志
-        ch.pipeline().addLast(LOGGING_HANDLER)
-        ch.pipeline().addLast(HttpServerCodec())
+    override fun initChannel(channel: Channel) {
+        channel.pipeline() //                .addLast(serverIdleStateHandler)
+            .addLast(HttpServerCodec())
             .addLast(ChunkedWriteHandler())
             .addLast(HttpObjectAggregator(1024 * 64))
             .addLast(WebSocketServerCompressionHandler())
             .addLast(WebSocketServerProtocolHandler("/", null, true))
-        // 消息编解码
-        ch.pipeline().addLast(decoder)
-        ch.pipeline().addLast(encoder)
-        ch.pipeline().addLast(dispatcher)
-        ch.pipeline().addLast(idle)
-
+            .addLast(messageEncoder)
+            .addLast(messageDecoder)
+            .addLast(messageDispatcher)
     }
 
     companion object {
