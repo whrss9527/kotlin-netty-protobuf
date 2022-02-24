@@ -1,19 +1,19 @@
 package com.ck567.netty.chatroom.server.handler
 
+import com.ck567.netty.chatroom.message.HeartBeatRequestMessage
+import com.ck567.netty.chatroom.message.LoginRequestMessage
 import com.ck567.netty.chatroom.message.Message
-import com.ck567.netty.chatroom.message.entity.HeartBeatProto
 import com.ck567.netty.chatroom.util.OptionType
 import io.netty.channel.Channel
 import io.netty.channel.ChannelHandler
+import io.netty.channel.ChannelHandlerContext
+import io.netty.channel.SimpleChannelInboundHandler
 
 
 @ChannelHandler.Sharable
-class HeartBeatHandler : MessageHandler<HeartBeatProto.HeartBeat> {
-    override fun execute(channel: Channel, message: HeartBeatProto.HeartBeat) {
-        val msg: Message = Message(OptionType.HeartBeatsReq.type,HeartBeatProto.HeartBeat.newBuilder().build())
-        channel.writeAndFlush(msg)
+class HeartBeatHandler : SimpleChannelInboundHandler<HeartBeatRequestMessage>() {
+    override fun channelRead0(ctx: ChannelHandlerContext, msg: HeartBeatRequestMessage) {
+        println("收到心跳消息")
     }
 
-    override val type: Short
-        get() = OptionType.HeartBeatsReq.type
 }
