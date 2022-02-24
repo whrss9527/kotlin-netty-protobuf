@@ -10,7 +10,7 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 
 @ChannelHandler.Sharable
-class LoginRequestMessageHandler : SimpleChannelInboundHandler<LoginRequestMessage>() {
+class LoginRequestHandler : SimpleChannelInboundHandler<LoginRequestMessage>() {
 
     override fun channelRead0(ctx: ChannelHandlerContext, msg: LoginRequestMessage) {
         logger.info("==================")
@@ -27,6 +27,6 @@ class LoginRequestMessageHandler : SimpleChannelInboundHandler<LoginRequestMessa
 //        }
     }
     companion object {
-        private val logger = logger<LoginRequestMessageHandler>()
+        private val logger = logger<LoginRequestHandler>()
     }
 }
