@@ -1,7 +1,6 @@
 package com.ck567.netty.chatroom.server
 
-import com.ck567.netty.chatroom.message.entity.LoginProto
-import com.ck567.netty.chatroom.server.handler.LoginHandler
+//import com.ck567.netty.chatroom.message.entity.LoginProto
 import com.ck567.netty.chatroom.server.handler.MessageHandler
 import com.ck567.netty.chatroom.util.logger
 import com.google.protobuf.MessageLite

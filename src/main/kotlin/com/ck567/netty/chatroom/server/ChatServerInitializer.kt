@@ -1,7 +1,7 @@
 package com.ck567.netty.chatroom.server
 
 //import com.ck567.netty.chatroom.protocol.ProcotolFrameDecoder
-import com.ck567.netty.chatroom.message.MessageDispatcher
+//import com.ck567.netty.chatroom.message.MessageDispatcher
 import com.ck567.netty.chatroom.protocol.MessageDecoder
 import com.ck567.netty.chatroom.protocol.MessageEncoder
 import com.ck567.netty.chatroom.server.handler.*
@@ -32,14 +32,15 @@ class ChatServerInitializer :  ChannelInitializer<Channel>() {
     lateinit var messageEncoder: MessageEncoder
     @Autowired
     lateinit var messageDecoder: MessageDecoder
-    @Autowired
-    lateinit var messageDispatcher: MessageDispatcher
+//    @Autowired
+//    lateinit var messageDispatcher: MessageDispatcher
 
 //    private val channelStateHandler: ChannelStateHandler? = null
     @Autowired
     lateinit var serverIdleStateHandler: ServerIdleStateHandler
 
-
+    val loginReqHandler = LoginRequestMessageHandler()
+    val heartBeat = HeartBeatHandler()
 
 
     override fun initChannel(channel: Channel) {
@@ -51,7 +52,8 @@ class ChatServerInitializer :  ChannelInitializer<Channel>() {
             .addLast(WebSocketServerProtocolHandler("/", null, true))
             .addLast(messageEncoder)
             .addLast(messageDecoder)
-            .addLast(messageDispatcher)
+            .addLast(loginReqHandler)
+            .addLast(heartBeat)
     }
 
     companion object {
