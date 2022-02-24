@@ -1,11 +1,14 @@
 package com.ck567.netty.chatroom.protocol
 
 import com.ck567.netty.chatroom.message.Message
+import com.ck567.netty.chatroom.util.OptionType
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageEncoder
 import io.netty.handler.codec.http.websocketx.BinaryWebSocketFrame
 import io.netty.handler.codec.http.websocketx.WebSocketFrame
+import kotlinx.serialization.SerializationStrategy
+import kotlinx.serialization.protobuf.ProtoBuf
 import org.springframework.stereotype.Component
 import java.lang.Exception
 
@@ -15,10 +18,13 @@ class MessageEncoder : MessageToMessageEncoder<Message>() {
     @Throws(Exception::class)
     override fun encode(ctx: ChannelHandlerContext, msg: Message, out: MutableList<Any>) {
         val outBuf = ctx.alloc().buffer()
-        val type: Short = msg.type
-        val data: ByteArray = msg.msg!!.toByteArray()
+        val type: Short = msg!!.type!!
+        println(type)
+        val oo = OptionType.getType(type)
+        println(oo)
+        val data: ByteArray = ProtoBuf.encodeToByteArray(oo as SerializationStrategy<Any>,msg.msg!!)
         // 写入操作数
-        outBuf.writeShort(type.toInt())
+        outBuf.writeShort(type!!.toInt())
         // 写入数据体
         outBuf.writeBytes(data)
         val frame: WebSocketFrame = BinaryWebSocketFrame(outBuf)
