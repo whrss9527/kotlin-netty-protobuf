@@ -1,7 +1,7 @@
 package com.ck567.netty.chatroom.protocol
 
 import com.ck567.netty.chatroom.message.Message
-import com.ck567.netty.chatroom.util.OptionType
+import com.ck567.netty.chatroom.util.OperateType
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageEncoder
@@ -18,13 +18,11 @@ class MessageEncoder : MessageToMessageEncoder<Message>() {
     @Throws(Exception::class)
     override fun encode(ctx: ChannelHandlerContext, msg: Message, out: MutableList<Any>) {
         val outBuf = ctx.alloc().buffer()
-        val type: Short = msg!!.type!!
-        println(type)
-        val oo = OptionType.getType(type)
-        println(oo)
-        val data: ByteArray = ProtoBuf.encodeToByteArray(oo as SerializationStrategy<Any>,msg.msg!!)
+        val type: Short = msg.type
+        val serialization = OperateType.getType(type)
+        val data: ByteArray = ProtoBuf.encodeToByteArray(serialization as SerializationStrategy<Any>,msg.msg)
         // 写入操作数
-        outBuf.writeShort(type!!.toInt())
+        outBuf.writeShort(type.toInt())
         // 写入数据体
         outBuf.writeBytes(data)
         val frame: WebSocketFrame = BinaryWebSocketFrame(outBuf)

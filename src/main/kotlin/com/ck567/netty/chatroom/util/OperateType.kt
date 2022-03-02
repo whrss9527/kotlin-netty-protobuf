@@ -3,7 +3,7 @@ package com.ck567.netty.chatroom.util
 import com.ck567.netty.chatroom.message.HeartBeatRequestMessage
 import com.ck567.netty.chatroom.message.LoginRequestMessage
 
-enum class OptionType(
+enum class OperateType(
     val type: Short
 ) {
     LoginReq(1),

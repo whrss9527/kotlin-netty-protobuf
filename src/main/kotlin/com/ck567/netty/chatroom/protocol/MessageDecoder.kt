@@ -1,6 +1,6 @@
 package com.ck567.netty.chatroom.protocol
 
-import com.ck567.netty.chatroom.util.OptionType
+import com.ck567.netty.chatroom.util.OperateType
 import io.netty.channel.ChannelHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageDecoder
@@ -26,7 +26,7 @@ class MessageDecoder : MessageToMessageDecoder<WebSocketFrame>() {
         val data = ByteArray(readableBytes)
         buf.readBytes(data)
         // 编解码器的分发
-        val serialization = OptionType.getType(type)
+        val serialization = OperateType.getType(type)
         val ob = ProtoBuf.decodeFromByteArray(serialization as DeserializationStrategy<Any>,data)
         out.add(ob)
     }
