@@ -26,7 +26,7 @@ class MessageDecoder : MessageToMessageDecoder<WebSocketFrame>() {
         val data = ByteArray(readableBytes)
         buf.readBytes(data)
         // 编解码器的分发
-        val serialization = OperateType.getType(type)
+        val serialization = OperateType.getSerializer(type)
         val ob = ProtoBuf.decodeFromByteArray(serialization as DeserializationStrategy<Any>,data)
         out.add(ob)
     }

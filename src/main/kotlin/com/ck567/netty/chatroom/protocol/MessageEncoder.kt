@@ -19,7 +19,7 @@ class MessageEncoder : MessageToMessageEncoder<Message>() {
     override fun encode(ctx: ChannelHandlerContext, msg: Message, out: MutableList<Any>) {
         val outBuf = ctx.alloc().buffer()
         val type: Short = msg.type
-        val serialization = OperateType.getType(type)
+        val serialization = OperateType.getSerializer(type)
         val data: ByteArray = ProtoBuf.encodeToByteArray(serialization as SerializationStrategy<Any>,msg.msg)
         // 写入操作数
         outBuf.writeShort(type.toInt())
