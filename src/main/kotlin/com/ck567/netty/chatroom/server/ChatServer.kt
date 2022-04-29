@@ -32,11 +32,7 @@ class ChatServer {
 
 
 
-    /**
-     * @description: 场景服务端启动
-     * @author: YapuLv
-     * @time: 2021/10/30 14:03
-     */
+
     @PostConstruct
     @Throws(InterruptedException::class)
     fun start() {
