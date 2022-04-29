@@ -1,6 +1,7 @@
 package com.ck567.netty.chatroom.util
 
 import com.ck567.netty.chatroom.message.HeartBeatRequestMessage
+import com.ck567.netty.chatroom.message.HeartBeatResponseMessage
 import com.ck567.netty.chatroom.message.LoginRequestMessage
 
 enum class OperateType(
@@ -11,6 +12,7 @@ enum class OperateType(
     LoginRes(2),
     LoginReq2(3),
     HeartBeatReq(1793),
+    HeartBeatRes(1795),
     ;
 
     companion object {
@@ -24,6 +26,7 @@ enum class OperateType(
                 LoginRes.type -> LoginRequestMessage.serializer()
                 LoginReq2.type -> LoginRequestMessage.serializer()
                 HeartBeatReq.type -> HeartBeatRequestMessage.serializer()
+                HeartBeatRes.type -> HeartBeatResponseMessage.serializer()
                 else -> {
                     HeartBeatRequestMessage.serializer()
                 }
