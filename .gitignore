@@ -233,3 +233,4 @@
 /build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i
 /build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i.len
 /build/test-results/test/TEST-com.ck567.netty.chatroom.ChatroomApplicationTests.xml
+*.class
