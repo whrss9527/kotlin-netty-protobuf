@@ -3,3 +3,11 @@ serializer:
 
 server:
   port: 8013
+
+logging:
+  config: classpath:log4j2.xml
+
+
+jwt:
+  access-token-secret: "K0DB8eEe2304dFC6"
+  access-token-expired-hours: 24
