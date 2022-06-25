@@ -11,9 +11,9 @@ Kafka 做消息总线
 src/main/
 ├──kotlin/**/chatroom
 │   ├── config/               // 配置(目前有jwt)
-│   ├── message/              // 具体的消息内容(protobuf)
+│   ├── message/              // 具体的消息类(protobuf)
 │   ├── protocol/             // 编码解码
-│   ├── server/               // 数据库
+│   ├── server/               // 服务与业务
 │   │   ├── handler/          // 消息处理器
 │   │   ├── message_bus/      // 消息总线(消息同步)
 │   │   ├── service/          // 业务处理

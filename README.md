@@ -1,31 +1,31 @@
 English | [简体中文](./README.zh_CN.md) 
-### 项目架构
+### Project Structure
 ```txt
 Kotlin + SpringBoot + Netty + protobuf + Spring security JWT + slf4j
-Kafka 做消息总线
+Kafka as a message bus
 ```
 
-### 目录结构
+### Catalog Structure
 
 ```txt
 src/main/
 ├──kotlin/**/chatroom
-│   ├── config/               // 配置(目前有jwt)
-│   ├── message/              // 具体的消息内容(protobuf)
-│   ├── protocol/             // 编码解码
-│   ├── server/               // 数据库
-│   │   ├── handler/          // 消息处理器
-│   │   ├── message_bus/      // 消息总线(消息同步)
-│   │   ├── service/          // 业务处理
-│   │   ├── session/          // 会话、房间管理
-│   │   └── ./*.kt            // netty服务启动 + 消息处理器注册
-│   ├── util/                 // 工具包
-│   └── Application.kt        // 程序启动入口
+│   ├── config/               // Component Configuration(jwt)
+│   ├── message/              // Specific Message Classes(protobuf)
+│   ├── protocol/             // Codecs
+│   ├── server/               // Service & Business
+│   │   ├── handler/          // Message Processor
+│   │   ├── message_bus/      // message_bus(Message Synchronization)
+│   │   ├── service/          // Business
+│   │   ├── session/          // Sessions, room management
+│   │   └── ./*.kt            // netty service start + message processor registration
+│   ├── util/                 // Toolkit
+│   └── Application.kt        // Program Launch Entrance
 └── resources/              
-    ├── static/               // 静态资源文件
-    ├── templates/            // 页面文件
-    ├── application.yml       // 配置文件
-    └── log4j2.xml            // 日志配置
+    ├── static/               // Static resource files
+    ├── templates/            // Page file
+    ├── application.yml       // Configuration file
+    └── log4j2.xml            // Log Configuration
 
 ```
 
