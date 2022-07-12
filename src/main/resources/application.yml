@@ -11,3 +11,28 @@ logging:
 jwt:
   access-token-secret: "K0DB8eEe2304dFC6"
 
+spring:
+  kafka:
+    bootstrap-servers: 172.17.244.16:9092
+    producer: # 生产者
+      retries: 3  #发送失败重试次数
+      acks: all  #所有分区副本确认后，才算消息发送成功
+      # 指定消息key和消息体的序列化编码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      auto-offset-reset: latest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+      # 关闭自动提交
+      enable-auto-commit: false
+    listener:
+      ack-mode: manual_immediate
+
+kafka:
+  topics: "test"
+  group-id: "test-group"
