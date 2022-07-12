@@ -27,6 +27,7 @@ dependencies {
     // jwt
     implementation("org.springframework.security:spring-security-jwt:$sprintJwtVersion")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     implementation("org.springframework.boot:spring-boot-starter-rsocket")
     implementation("org.springframework.boot:spring-boot-starter-web"){
         exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
@@ -38,21 +39,18 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
-    implementation("io.netty:netty-all:4.1.63.Final")
+
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("com.google.guava:guava:30.1.1-jre")
-
-    implementation("com.google.guava:guava:31.0.1-jre")
+    // netty
     implementation("io.netty:netty-all")
+    implementation("io.netty:netty-all:4.1.63.Final")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
     // protobuf
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.3.0")
     implementation("com.google.protobuf:protobuf-kotlin-lite:3.19.1")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20")
     implementation("com.google.protobuf:protobuf-java:3.19.1")
-//    implementation("com.google.protobuf:protoc:3.19.1")
-//    implementation("org.jetbrains.kotlin:kotlin-serialization:1.5.20")
-//    implementation("com.google.protobuf:protobuf-gradle-plugin:0.8.8")
     // log
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4j2Version")
     implementation("org.apache.logging.log4j:log4j-core:$log4j2Version") {
@@ -63,6 +61,11 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api:$log4j2Version")
     implementation("org.apache.logging.log4j:log4j-jul:$log4j2Version")
     implementation("org.slf4j:jul-to-slf4j:1.7.25")
+    // redis
+    implementation("redis.clients:jedis:3.2.0")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    // kafka
+    implementation("org.springframework.kafka:spring-kafka")
 }
 
 tasks.withType<KotlinCompile> {
