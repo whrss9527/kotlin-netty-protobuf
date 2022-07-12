@@ -9,9 +9,6 @@ import org.springframework.context.annotation.Configuration
 @ComponentScan(basePackages = ["com.ck567"])
 class OpsAppConfig {
 
-    @Value("\${jwt.access-token-expired-hours}")
-    private val expiredHours = 0
-
     @Value("\${jwt.access-token-secret}")
     private val accessTokenSecret = "P1X8X@qL3i!5XBFQ"
 
@@ -19,8 +16,6 @@ class OpsAppConfig {
     fun hmacJwtValidator(): HMACJwtGenerator {
 
         return HMACJwtGenerator(
-            issuer = "ops-api",
-            expiredMinutes = 60 * expiredHours, // n hours
             accessTokenSecret = accessTokenSecret
         )
     }
