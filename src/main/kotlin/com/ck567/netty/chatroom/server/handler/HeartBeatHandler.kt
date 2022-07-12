@@ -2,7 +2,6 @@ package com.ck567.netty.chatroom.server.handler
 
 import com.ck567.netty.chatroom.message.HeartBeatRequestMessage
 import com.ck567.netty.chatroom.message.HeartBeatResponseMessage
-import com.ck567.netty.chatroom.message.LoginRequestMessage
 import com.ck567.netty.chatroom.message.Message
 import com.ck567.netty.chatroom.util.OperateType
 import io.netty.channel.ChannelHandler
