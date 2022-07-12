@@ -28,3 +28,4 @@
 
 /build/resources/main/application.properties
 /build/resources/main/application.yml
+*.class
