@@ -25,7 +25,7 @@ class Jwt {
         var hmacJwtValidator: HMACJwtGenerator? = null
 
         fun verify(jwtToken: String, userId: String): Boolean {
-            println("jwtToken =$jwtToken")
+            logger.debug("jwtToken =$jwtToken")
             val claims: Claims = try {
                 hmacJwtValidator!!.validate(jwtToken)
             } catch (ex: ExpiredJwtException) {
