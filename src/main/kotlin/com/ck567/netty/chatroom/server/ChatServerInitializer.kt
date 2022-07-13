@@ -21,18 +21,15 @@ class ChatServerInitializer :  ChannelInitializer<Channel>() {
     lateinit var messageEncoder: MessageEncoder
     @Autowired
     lateinit var messageDecoder: MessageDecoder
-//    @Autowired
-//    lateinit var messageDispatcher: MessageDispatcher
 
-//    private val channelStateHandler: ChannelStateHandler? = null
-    @Autowired
-    lateinit var serverIdleStateHandler: ServerIdleStateHandler
+    var serverIdleStateHandler = ServerIdleStateHandler()
 
     val heartBeat = HeartBeatHandler()
 
 
     override fun initChannel(channel: Channel) {
-        channel.pipeline() //                .addLast(serverIdleStateHandler)
+        channel.pipeline()
+            .addLast(serverIdleStateHandler)
             .addLast(HttpServerCodec())
             .addLast(ChunkedWriteHandler())
             .addLast(HttpObjectAggregator(1024 * 64))
