@@ -1,7 +1,5 @@
 package com.ck567.netty.chatroom.server
 
-//import com.ck567.netty.chatroom.protocol.ProcotolFrameDecoder
-//import com.ck567.netty.chatroom.message.MessageDispatcher
 import com.ck567.netty.chatroom.protocol.MessageDecoder
 import com.ck567.netty.chatroom.protocol.MessageEncoder
 import com.ck567.netty.chatroom.server.handler.*
@@ -30,7 +28,6 @@ class ChatServerInitializer :  ChannelInitializer<Channel>() {
     @Autowired
     lateinit var serverIdleStateHandler: ServerIdleStateHandler
 
-    val loginReqHandler = LoginRequestHandler()
     val heartBeat = HeartBeatHandler()
 
 
@@ -43,7 +40,6 @@ class ChatServerInitializer :  ChannelInitializer<Channel>() {
             .addLast(WebSocketServerProtocolHandler("/", null, true))
             .addLast(messageEncoder)
             .addLast(messageDecoder)
-            .addLast(loginReqHandler)
             .addLast(heartBeat)
     }
 
